@@ -1,0 +1,6 @@
+user client
+topic read #
+
+user server
+topic read #
+topic write #

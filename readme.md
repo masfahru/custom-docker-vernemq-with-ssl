@@ -1,0 +1,7 @@
+# Custom Docker VerneMQ with SSL
+
+You should build your own VerneMQ docker image and push it to docker hub, you can check the official Docker Vernemq: https://github.com/vernemq/docker-vernemq.
+
+But using that official Docker Vernemq, i am unable to enable secure websocket (wss) using Dockerfile, but it can be enabled using Helm package manager: https://github.com/vernemq/docker-vernemq/blob/148c27a245d5cdbe7a62c54db9b9e8c247a873f8/helm/vernemq/templates/statefulset.yaml#L84, so i have to modify the script to enable wss automatically when server certificates are provided, i have push the output image into docker hub: https://hub.docker.com/repository/docker/imamfahrurrofi/vernemq/general. The environment should be the same with the official Docker Vernemq, except i don't have to accept eula (env `DOCKER_VERNEMQ_ACCEPT_EULA` is not required). 
+
+In this repository, i provide a Dockerfile which use the custom docker images. To enable secure websockets (wss), you have to provide env `DOCKER_VERNEMQ_LISTENER__WSS__CAFILE`, `DOCKER_VERNEMQ_LISTENER__WSS__CERTFILE`, `DOCKER_VERNEMQ_LISTENER__WSS__KEYFILE` and their respective certificates in folder ssl. There is an example of file based access control list (vmq.acl).
